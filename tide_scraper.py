@@ -42,7 +42,7 @@ def _regex_search(start: str, end: str, text: str) -> List[str]:
 
 
 # pylint: disable=too-many-locals
-def low_tides_information(location: str) -> Dict[str, List[Dict[str, str]]]:
+def low_tides_information(location: str) -> Dict[str, Dict[str, str]]:
     """Returns the time and height for each daylight low tide
     for a ~28 day forcast from https://www.tide-forecast.com
     for a specified location.
@@ -54,7 +54,7 @@ def low_tides_information(location: str) -> Dict[str, List[Dict[str, str]]]:
 
     Returns
     -------
-    Dict[str, List[Dict[str, str]]]
+    Dict[str, Dict[str, str]]]
         Dictionary of data of low tide information
     """
 
@@ -65,7 +65,7 @@ def low_tides_information(location: str) -> Dict[str, List[Dict[str, str]]]:
     text = response.text
 
     # Dictionary to store our low tide data
-    data: Dict[str, List[Dict[str, str]]] = {}
+    data: Dict[str, Dict[str, str]] = {}
 
     # Table containing tide forecasts
     table_start = '<div class="tide_flex_start">'
@@ -102,10 +102,11 @@ def low_tides_information(location: str) -> Dict[str, List[Dict[str, str]]]:
         sunrise = parse(_regex_search(sunrise_start, sunrise_end, i)[0])
         sunset = parse(_regex_search(sunset_start, sunset_end, i)[0])
 
-        low_tides = [{
+        low_tides = {
             j[:8].strip(): j[-7:].strip(">")
-        } for j in _regex_search(low_tide_start, low_tide_end, i)
-                     if sunrise < parse(j[:8]) < sunset]
+            for j in _regex_search(low_tide_start, low_tide_end, i)
+            if sunrise < parse(j[:8]) < sunset
+        }
 
         data[(_regex_search(title_start, title_end, i)[0])] = low_tides
 

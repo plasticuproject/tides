@@ -1,5 +1,5 @@
 """app.py"""
-from typing import Dict, List, Union
+from typing import Dict, Union
 from flask import Flask
 from werkzeug.exceptions import NotFound
 import tide_scraper
@@ -33,7 +33,7 @@ def index() -> str:
 
 
 @app.route("/api/v1/<string:location>/")
-def low_tides(location: str) -> Union[str, Dict[str, List[Dict[str, str]]]]:
+def low_tides(location: str) -> Union[str, Dict[str, Dict[str, str]]]:
     """Returns the time and height for each daylight low tide
     for a ~28 day forcast from https://www.tide-forecast.com
     for a specified location."""
