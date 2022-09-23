@@ -1,4 +1,4 @@
-"""test.py"""
+"""test_api.py"""
 import unittest
 import json
 from unittest import mock
@@ -41,7 +41,7 @@ class ApiTests(unittest.TestCase):
         pass
 
     def test_live_site(self) -> None:
-        """Test that tide-forecast site is live.."""
+        """Test that tide-forecast site is live."""
         response = self.app.get("/api/v1/Huntington-Beach",
                                 follow_redirects=True)
         self.assertEqual(response.status_code, 200)
@@ -75,7 +75,7 @@ class ApiTests(unittest.TestCase):
 
     @mock.patch("requests.get", side_effect=mocked_requests_get)
     def test_request_mock_404(self, mock_get: mock.MagicMock) -> None:
-        """Yo."""
+        """Test that the request mock fails correctly."""
         response = requests.get("fart", timeout=60)
         self.assertEqual(response.status_code, 404)
 
