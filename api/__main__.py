@@ -2,7 +2,7 @@
 from typing import Dict, Union
 from flask import Flask
 from werkzeug.exceptions import NotFound
-import tide_scraper
+from api.scraper.tide_scraper import low_tides_information
 
 app = Flask(__name__)
 
@@ -38,7 +38,7 @@ def low_tides(location: str) -> Union[str, Dict[str, Dict[str, str]]]:
     for a ~28 day forcast from https://www.tide-forecast.com
     for a specified location."""
     if location.lower() in ENDPOINTS:
-        return tide_scraper.low_tides_information(location)
+        return low_tides_information(location)
     return index()
 
 

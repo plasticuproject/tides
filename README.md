@@ -8,7 +8,7 @@ Requirements:
 Install and Run:
 ```
 pip install -r requirements.txt
-python app.py
+python -m api
 ```
 
 Valid Endpoints:
