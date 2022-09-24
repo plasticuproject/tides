@@ -1,3 +1,9 @@
+[![build](https://github.com/plasticuproject/tides/actions/workflows/tests.yml/badge.svg)](https://github.com/plasticuproject/tides/actions/workflows/tests.yml)
+[![Python 3.8](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/release/python-380/)
+![GitHub](https://img.shields.io/github/license/plasticuproject/tides)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=plasticuproject_tides&metric=alert_status)](https://sonarcloud.io/dashboard?id=plasticuproject_tides)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=plasticuproject_tides&metric=security_rating)](https://sonarcloud.io/dashboard?id=plasticuproject_tides)
+
 Toy Flask API that returns forecasted low tide data during sunlight hours for selected locations.
 
 Requirements:

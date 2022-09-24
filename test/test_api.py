@@ -2,25 +2,24 @@
 import unittest
 import json
 from unittest import mock
-from typing import Optional, Any
+from typing import Optional
 import requests
 from api.__main__ import app
 from api.scraper.tide_scraper import low_tides_information
 
 
+class MockResponse:  # pylint: disable=too-few-public-methods
+    """Mock API responses."""
+
+    def __init__(self, response_data: Optional[str], status_code: int) -> None:
+        self.response_data = response_data
+        self.status_code = status_code
+        self.text = response_data
+
+
 # pylint: disable=unused-argument
-def mocked_requests_get(*args: Any, **kwargs: Any) -> Any:
+def mocked_requests_get(*args: str, **kwargs: str) -> MockResponse:
     """This method will be used by the mock to replace requests.get."""
-
-    class MockResponse:  # pylint: disable=too-few-public-methods
-        """Mock API responses."""
-
-        def __init__(self, response_data: Optional[str],
-                     status_code: int) -> None:
-            self.response_data = response_data
-            self.status_code = status_code
-            self.text = response_data
-
     if args[0] == ("https://www.tide-forecast.com/locations/" +
                    "Huntington-Beach/tides/latest"):
         with open("./test/test.html", "r", encoding="utf-8") as infile:
@@ -33,11 +32,13 @@ class ApiTests(unittest.TestCase):
     """Test endpoints and low tide scraper."""
 
     def setUp(self) -> None:
+        """Set up flask app for testing."""
         app.config["DEBUG"] = False
         self.app = app.test_client()
         self.assertEqual(app.debug, False)
 
     def tearDown(self) -> None:
+        """Tear down."""
         pass
 
     def test_live_site(self) -> None:

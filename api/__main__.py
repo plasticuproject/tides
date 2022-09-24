@@ -1,10 +1,13 @@
-"""app.py"""
+"""__main__.py"""
 from typing import Dict, Union
 from flask import Flask
+from flask_wtf.csrf import CSRFProtect  # type: ignore
 from werkzeug.exceptions import NotFound
 from api.scraper.tide_scraper import low_tides_information
 
 app = Flask(__name__)
+csrf = CSRFProtect(app)
+csrf.init_app(app)
 
 ENDPOINTS = [
     "half-moon-bay-california", "huntington-beach", "providence-rhode-island",
