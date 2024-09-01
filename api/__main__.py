@@ -45,5 +45,5 @@ def low_tides(location: str) -> str | dict[str, dict[str, str]]:
     return index()
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": # pragma: no cover
     app.run()
