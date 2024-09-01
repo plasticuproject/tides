@@ -1,5 +1,5 @@
 """__main__.py"""
-from typing import Dict, Union
+from __future__ import annotations
 from flask import Flask
 from flask_wtf.csrf import CSRFProtect  # type: ignore
 from werkzeug.exceptions import NotFound
@@ -36,7 +36,7 @@ def index() -> str:
 
 
 @app.route("/api/v1/<string:location>/")
-def low_tides(location: str) -> Union[str, Dict[str, Dict[str, str]]]:
+def low_tides(location: str) -> str | dict[str, dict[str, str]]:
     """Returns the time and height for each daylight low tide
     for a ~28 day forcast from https://www.tide-forecast.com
     for a specified location."""

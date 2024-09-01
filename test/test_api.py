@@ -1,8 +1,8 @@
 """test_api.py"""
+from __future__ import annotations
 import unittest
 import json
 from unittest import mock
-from typing import Optional
 import requests
 from api.__main__ import app
 from api.scraper.tide_scraper import low_tides_information
@@ -11,7 +11,7 @@ from api.scraper.tide_scraper import low_tides_information
 class MockResponse:  # pylint: disable=too-few-public-methods
     """Mock API responses."""
 
-    def __init__(self, response_data: Optional[str], status_code: int) -> None:
+    def __init__(self, response_data: str | None, status_code: int) -> None:
         self.response_data = response_data
         self.status_code = status_code
         self.text = response_data
@@ -39,12 +39,12 @@ class ApiTests(unittest.TestCase):
 
     def tearDown(self) -> None:
         """Tear down."""
-        pass
 
     def test_live_site(self) -> None:
         """Test that tide-forecast site is live."""
         response = self.app.get("/api/v1/Huntington-Beach",
                                 follow_redirects=True)
+        print(response.status_code)
         self.assertEqual(response.status_code, 200)
 
     def test_index(self) -> None:
